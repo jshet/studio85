@@ -1,7 +1,7 @@
 # Welcome to the Studio85 code repository
 
 I like to mess about with making machines do things. 
-This repo is the companion to the Studio85 YouTube channel.
+This repo is the companion to the Studio85 YouTube channel. I should probably put a link here.
 If you have questions about something here, maybe take a look there. 
 And vice versa. 
 
