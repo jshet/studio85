@@ -61,8 +61,8 @@ def move_back(motor, step_list=steps, this_many=three_sixty, this_much=delay):
     
 
 
-move(motor1, this_many=400, this_much=1100)
-move_back(motor1, this_many=800, this_much=1100)
+#move(motor1, this_many=1200, this_much=1100)
+move_back(motor1, this_many=1200, this_much=1100)
 #move(motor1, this_many=200, this_much=1200)
 #move(motor1, this_many=200, this_much=1000)
 #move(motor1, this_many=200, this_much=800)
