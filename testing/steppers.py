@@ -8,10 +8,17 @@ m4 = Pin(5, Pin.OUT)
 
 motor1 = [m1, m2, m3, m4]
 
-three_sixty = 513
+three_sixty = 200
 how_far = three_sixty
 
 delay = 1000
+
+full_steps = [
+    [1,1,0,0],
+    [0,1,1,0],
+    [0,0,1,1],
+    [1,0,0,1]
+    ]
 
 steps = [
     [1,0,0,0],
@@ -21,13 +28,6 @@ steps = [
     [0,0,1,0],
     [0,0,1,1],
     [0,0,0,1],
-    [1,0,0,1]
-   ]
-
-half_steps = [
-    [1,1,0,0],
-    [0,1,1,0],
-    [0,0,1,1],
     [1,0,0,1]
    ]
 
@@ -43,6 +43,7 @@ def end_it():
 
 def move(motor, step_list=steps, this_many=three_sixty, this_much=delay):
     for i in range(this_many):
+        print(i)
         for move in step_list:
             send_it(motor, move[0],move[1],move[2],move[3])
             time.sleep_us(this_much)
@@ -52,19 +53,15 @@ def move(motor, step_list=steps, this_many=three_sixty, this_much=delay):
 def move_back(motor, step_list=steps, this_many=three_sixty, this_much=delay):
     step_list.reverse()
     for i in range(this_many):
+        print(i)
         for move in step_list:
             send_it(motor, move[0],move[1],move[2],move[3])
             time.sleep_us(this_much)
     send_it(motor, 0,0,0,0)
     time.sleep(0.25)
     step_list.reverse()
-    
 
-
-#move(motor1, this_many=200, this_much=1100)
-move_back(motor1, this_many=200, this_much=1300)
-#move(motor1, this_many=20, this_much=1200)
-#move(motor1, this_many=200, this_much=1000)
-#move(motor1, this_many=200, this_much=800)
+move(motor1, this_many=200, this_much=1500)
+move_back(motor1, step_list=full_steps, this_many=200, this_much=3000)
 
 end_it()
