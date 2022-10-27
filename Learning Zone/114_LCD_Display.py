@@ -1,7 +1,7 @@
 from machine import Pin,SPI,PWM
 import framebuf
 import time
-
+from machine import RTC
 
 BL = 13
 DC = 8
@@ -10,6 +10,7 @@ MOSI = 11
 SCK = 10
 CS = 9
 
+rtc = RTC()
 
 class LCD_1inch14(framebuf.FrameBuffer):
     def __init__(self):
@@ -168,7 +169,7 @@ if __name__=='__main__':
     LCD.text("Demo",8,20,LCD.green)
     LCD.text("Pico-LCD-1.14",8,32,LCD.green)
  
-    LCD.line(8,44,134,44,LCD.green)
+    LCD.line(8,84,134,84,LCD.green)
 
     LCD.text("Count:", 8, 50, LCD.green)
 
@@ -212,7 +213,13 @@ if __name__=='__main__':
             
         if(keyB.value() == 0):
             LCD.fill_rect(228,125,10,10,LCD.green)
+            LCD.fill_rect(98,98,70,10,LCD.green)
+            hr = rtc.datetime()[4]
+            mn = rtc.datetime()[5]
+            sec = rtc.datetime()[6]
+            LCD.text(f"{hr}:{mn}:{sec}", 100, 100, LCD.red)
             print("B")
+            
         else :
             LCD.fill_rect(228,125,10,10,LCD.green)
             LCD.rect(228,125,10,10,LCD.green)
@@ -237,7 +244,6 @@ if __name__=='__main__':
             LCD.rect(17,108,10,10,LCD.green)
             
         
-
         if(key4.value() == 0):#左
             LCD.fill_rect(2,108,10,10,LCD.red)
             print("LEFT")
