@@ -1,9 +1,11 @@
 '''
-User configured settings for Framer. 
+User configured settings for Carpenter. 
 Helpful defaults, obvious features, customizable.
 '''
 
-NAME = "Framer App"
+import network
+
+NAME = "Carpenter"
 
 THEME = "themes/default"
 
@@ -13,3 +15,4 @@ DEVICE_ID = "ABC-1234"
 
 USER_ID = ""
 
+NETWORK = network.WAP(ssid="test", password="easytoguess")

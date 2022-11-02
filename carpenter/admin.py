@@ -1,6 +1,8 @@
 '''
-CLI for working with Framer.
+CLI for working with Carpenter.
 '''
+
+import settings
 
 def serve():
     pass 

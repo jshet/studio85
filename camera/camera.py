@@ -10,7 +10,7 @@ def take_pictures(min_focus, max_focus):
     print(f"BTN_NORTH: {min_focus}, BTN_WEST: {max_focus}")
     with camera:
         camera.resolution = (1920,1080)
-        camera.framerate = 30
+        camera.Carpenterate = 30
         
         stack_num = 5
         stack_spacing = 5
