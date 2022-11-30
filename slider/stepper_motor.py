@@ -90,10 +90,15 @@ def move(m, steps):
 # ===== Main
 
 def main():
+    steps = steps_per_rev
     try:
         while True:
-            distance = input("-->")
-            steps = distance_to_steps(distance)
+            request = input("-->")
+            if request in "XxQuitquitClosecloseStopstopEndendByebyeCiaociao":
+                print(f"{request}ing...goodbye!")
+                break
+            if len(request) > 0:
+                steps = distance_to_steps(distance)
             move(m, steps)
             print(f"{steps=}")
     except Exception as ex:
