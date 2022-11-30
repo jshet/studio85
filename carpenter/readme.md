@@ -17,22 +17,22 @@ Instead of rewriting applications, only the Carpenter classes need modification.
 from Carpenter import blueprints as bp
 from Carpenter import interfaces as ui
 
-motor_x = bp.stepper_motor(version="1234", zero=True, position_sensor=True)
-motor_x.zero()  # use the limit switches to find zero
-motor_x.cw(7)   # move clockwise 7 steps
-motor_x.ccw(20rpm)
+mx = bp.stepper_motor(version="1234", zero=True, position_sensor=True)
+mx.zero()  # use the limit switches to find zero
+mx.cw(7)   # move clockwise 7 steps
+mx.ccw(20rpm)
 
-print(motor_x.position)  # show the current expected position of the motor in degrees and steps from zero
-print(motor_x.sensed_position)  # show the current sensed position of the motor in degrees and steps from zero
-print(motor_x.specs)   # show the values within which the motor can operate, including step resolution, max speed, microstepping options, etc.
+print(mx.position)  # show the current expected position of the motor in degrees and steps from zero
+print(mx.sensed_position)  # show the current sensed position of the motor in degrees and steps from zero
+print(mx.specs)   # show the values within which the motor can operate, including step resolution, max speed, microstepping options, etc.
 
 ui = bp.server(wap=True, ssid="mydevice", password="password")
-ui.write(motor_x.specs)
+ui.write(mx.specs)
 
 speed = ui.
 
-forward = ui.btn("Forward", do=motor_x.cw())
-reverse = ui.btn("Reverse", do=motor_x.ccw())
+forward = ui.btn("Forward", do=mx.cw())
+reverse = ui.btn("Reverse", do=mx.ccw())
 
 
 ```
