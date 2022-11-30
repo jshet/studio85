@@ -98,7 +98,7 @@ def main():
                 print(f"{request}ing...goodbye!")
                 break
             if len(request) > 0:
-                steps = distance_to_steps(distance)
+                steps = distance_to_steps(request)
             move(m, steps)
             print(f"{steps=}")
     except Exception as ex:
