@@ -20,7 +20,11 @@ tpi = 12
 tpmm = tpi / 25.4
 steps_per_rev = 360 / motor_step_angle
 
-step_delay = 1250
+high_speed = 1250
+low_speed = 2500
+
+ramp_starting_speed = 5000
+ramp_speed_interval = 100
 move_delay = 100000
 
 if full_step_mode:
@@ -69,7 +73,7 @@ def turn_off(motor):
     for p in motor:
         p.value(0)
 
-def step(motor, direction):
+def step(motor, direction, delay=high_speed):
     if direction == -1:
         coil_steps.reverse()
     # it using half step mode, do two half steps each time to maintain step counts
@@ -81,18 +85,27 @@ def step(motor, direction):
         pin_values = coil_steps[0]
         set_pins(motor, pin_values)
         coil_steps.append(coil_steps.pop(0))
-        sleep_us(step_delay)
+        sleep_us(delay)
     if direction == -1:
         coil_steps.reverse()
 
-def move(m, steps):
+def move(m, steps, speed="l"):
+    if speed == "h":
+        step_delay = high_speed
+    else:
+        step_delay = low_speed
+    ramp_speed = ramp_starting_speed
     if steps < 0:
         steps *= -1
         direction = -1
     else:
         direction = 1
     for i in range(steps):
-        step(m, direction=direction)
+        step(m, direction=direction, delay=ramp_speed)
+        if ramp_speed > (step_delay + ramp_speed_interval):
+            ramp_speed -= ramp_speed_interval
+        else:
+            ramp_speed = step_delay
     turn_off(m)
 
 # ===== Main
