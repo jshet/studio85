@@ -30,6 +30,14 @@ else:
 
 # ===== Unit calculations
 
+'''
+What if this used a dictionary?
+IF dict key (unit of measure) in request
+THEN return dict key and value (multiplier)
+The calling function could then split the string on the key and multiply the first element by the multiplier.
+Seems like that could be concise and expandable.
+Only one key,value pair required to add a new unit of measure.
+'''
 steps_per_inch = tpi * steps_per_rev
 steps_per_mm = tpmm * steps_per_rev
 steps_per_deg = steps_per_rev / 360
@@ -84,7 +92,7 @@ def move(m, steps):
     else:
         direction = 1
     for i in range(steps):
-        step(m, direction=direction)    
+        step(m, direction=direction)
     turn_off(m)
 
 # ===== Main
@@ -94,13 +102,14 @@ def main():
     try:
         while True:
             request = input("-->")
-            if request in "XxQuitquitClosecloseStopstopEndendByebyeCiaociao":
+            if request in ["X","x","Q","q","Exit","exit","Quit","quit"]:
                 print(f"{request}ing...goodbye!")
                 break
             if len(request) > 0:
-                steps = distance_to_steps(distance)
+                steps = distance_to_steps(request)
+            print(f"Moving {steps} steps")
             move(m, steps)
-            print(f"{steps=}")
+
     except Exception as ex:
         turn_off(m)
         print(ex)
@@ -108,3 +117,4 @@ def main():
 if __name__ == "__main__":
     main()
     
+# where did the 'repeat' thing go?
