@@ -89,7 +89,7 @@ def step(motor, direction, delay=high_speed):
     if direction == -1:
         coil_steps.reverse()
 
-def move(m, steps, speed="l"):
+def move(m, steps, speed="h"):
     if speed == "h":
         step_delay = high_speed
     else:
