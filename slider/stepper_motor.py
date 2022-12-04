@@ -107,7 +107,10 @@ def main():
                 break
             if len(request) > 0:
                 steps = distance_to_steps(request)
+<<<<<<< HEAD
             print(f"Moving {steps} steps")
+=======
+>>>>>>> 6e6b6ed89985ad3885650a8426216c323577aab2
             move(m, steps)
 
     except Exception as ex:
