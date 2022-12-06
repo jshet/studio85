@@ -89,8 +89,8 @@ def step(motor, direction, delay=high_speed):
     if direction == -1:
         coil_steps.reverse()
 
-def move(m, steps, speed="h"):
-    if speed == "h":
+def move(m, steps, fast_mode=False):
+    if fast_mode == True:
         step_delay = high_speed
     else:
         step_delay = low_speed
@@ -111,17 +111,25 @@ def move(m, steps, speed="h"):
 # ===== Main
 
 def main():
+    print("\n"*2,"="*10,"OPEN-SLIDER V0.1","="*10,"\n")
+    print("Submit a request in the format [measurement][unit of measure].\n")
     steps = steps_per_rev
+    fast_mode = False
+
     try:
         while True:
             request = input("-->")
-            if request in ["X","x","Q","q","Exit","exit","Quit","quit"]:
-                print(f"{request}ing...goodbye!")
-                break
-            if len(request) > 0:
-                steps = distance_to_steps(request)
-            print(f"Moving {steps} steps")
-            move(m, steps)
+            if request == "speed":
+                fast_mode = not fast_mode
+                print(f"{fast_mode=}")
+            else:
+                if request in ["X","x","Q","q","Exit","exit","Quit","quit"]:
+                    print(f"{request}ing...goodbye!")
+                    break
+                if len(request) > 0:
+                    steps = distance_to_steps(request)
+                print(f"Moving {steps} steps")
+                move(m, steps, fast_mode=fast_mode)
 
     except Exception as ex:
         turn_off(m)
