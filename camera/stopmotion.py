@@ -13,7 +13,7 @@ camera.preview_window=(0, 38, 1920, 1080)
 
 camera.start_preview()
 
-camera.iso = 100
+camera.iso = 200
 sleep(3)
 
 camera.shutter_speed = camera.exposure_speed
